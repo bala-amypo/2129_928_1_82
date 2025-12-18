@@ -1,4 +1,3 @@
-// EmployeeProfile.java
 package com.example.demo.Entity;
 
 import java.time.LocalDateTime;

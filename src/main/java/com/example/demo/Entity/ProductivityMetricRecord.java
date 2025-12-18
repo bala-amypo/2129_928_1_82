@@ -1,5 +1,4 @@
-// ProductivityMetricRecord.java
-package com.example.demo.entity;
+package com.example.demo.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,10 +25,7 @@ public class ProductivityMetricRecord {
 
     public ProductivityMetricRecord() {}
 
-    public ProductivityMetricRecord(Long id, Long employeeId, LocalDate date,
-            Double hoursLogged, Integer tasksCompleted,
-            Integer meetingsAttended, Double productivityScore,
-            String rawDataJson, LocalDateTime submittedAt) {
+    public ProductivityMetricRecord(Long id, Long employeeId, LocalDate date,Double hoursLogged, Integer tasksCompleted,Integer meetingsAttended, Double productivityScore,String rawDataJson, LocalDateTime submittedAt) {
         this.id = id;
         this.employeeId = employeeId;
         this.date = date;
@@ -62,14 +58,33 @@ public class ProductivityMetricRecord {
      this.date = date; 
     }
     public Double getHoursLogged() { 
-     return hoursLogged; }
-    public void setHoursLogged(Double hoursLogged) { this.hoursLogged = hoursLogged; }
-    public Integer getTasksCompleted() { return tasksCompleted; }
-    public void setTasksCompleted(Integer tasksCompleted) { this.tasksCompleted = tasksCompleted; }
-    public Integer getMeetingsAttended() { return meetingsAttended; }
-    public void setMeetingsAttended(Integer meetingsAttended) { this.meetingsAttended = meetingsAttended; }
-    public Double getProductivityScore() { return productivityScore; }
-    public void setProductivityScore(Double productivityScore) { this.productivityScore = productivityScore; }
-    public String getRawDataJson() { return rawDataJson; }
-    public void setRawDataJson(String rawDataJson) { this.rawDataJson = rawDataJson; }
+     return hoursLogged; 
+    }
+    public void setHoursLogged(Double hoursLogged) { 
+     this.hoursLogged = hoursLogged; 
+    }
+    public Integer getTasksCompleted() {
+     return tasksCompleted; 
+    }
+    public void setTasksCompleted(Integer tasksCompleted) { 
+     this.tasksCompleted = tasksCompleted; 
+    }
+    public Integer getMeetingsAttended() { 
+     return meetingsAttended; 
+    }
+    public void setMeetingsAttended(Integer meetingsAttended) { 
+     this.meetingsAttended = meetingsAttended; 
+    }
+    public Double getProductivityScore() { 
+     return productivityScore; 
+    }
+    public void setProductivityScore(Double productivityScore) {
+     this.productivityScore = productivityScore; 
+    }
+    public String getRawDataJson() { 
+     return rawDataJson; 
+    }
+    public void setRawDataJson(String rawDataJson) { 
+     this.rawDataJson = rawDataJson; 
+    }
 }
