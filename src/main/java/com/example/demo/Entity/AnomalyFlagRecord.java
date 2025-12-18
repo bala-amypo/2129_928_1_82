@@ -20,10 +20,7 @@ public class AnomalyFlagRecord {
 
     public AnomalyFlagRecord() {}
 
-    public AnomalyFlagRecord(Long id, Long employeeId, Long metricId,
-                             String ruleCode, String severity,
-                             String details, boolean resolved,
-                             LocalDateTime flaggedAt) {
+    public AnomalyFlagRecord(Long id, Long employeeId, Long metricId,String ruleCode, String severity,String details, boolean resolved,LocalDateTime flaggedAt) {
         this.id = id;
         this.employeeId = employeeId;
         this.metricId = metricId;
