@@ -7,10 +7,7 @@ public interface AnomalyFlagService {
 
     AnomalyFlagRecord flagAnomaly(AnomalyFlagRecord flag);
 
-    private final resolved;
-    AnomalyFlagRecord setResolve(Long id){
-        this.resolve=resolve;
-    };
+    AnomalyFlagRecord resolveFlag(Long id);
 
     List<AnomalyFlagRecord> getFlagsByEmployee(Long employeeId);
 
