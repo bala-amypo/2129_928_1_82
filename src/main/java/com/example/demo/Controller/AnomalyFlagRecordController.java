@@ -7,11 +7,11 @@ import com.example.demo.Service.AnomalyFlagService;
 
 @RestController
 @RequestMapping("/api/anomalies")
-public class AnomalyFlagController {
+public class AnomalyFlagRecordController {
 
     private final AnomalyFlagService service;
 
-    public AnomalyFlagController(AnomalyFlagService service) {
+    public AnomalyFlagRecordController(AnomalyFlagService service) {
         this.service = service;
     }
 

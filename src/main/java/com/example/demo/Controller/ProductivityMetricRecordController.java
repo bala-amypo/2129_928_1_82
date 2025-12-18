@@ -7,11 +7,11 @@ import com.example.demo.Service.ProductivityMetricService;
 
 @RestController
 @RequestMapping("/api/metrics")
-public class ProductivityMetricController {
+public class ProductivityMetricRecordController {
 
     private final ProductivityMetricService service;
 
-    public ProductivityMetricController(ProductivityMetricService service) {
+    public ProductivityMetricRecordController(ProductivityMetricService service) {
         this.service = service;
     }
 

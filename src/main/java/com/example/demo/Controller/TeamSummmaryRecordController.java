@@ -7,11 +7,11 @@ import com.example.demo.Service.TeamSummaryService;
 
 @RestController
 @RequestMapping("/api/team-summaries")
-public class TeamSummaryController {
+public class TeamSummaryRecordController {
 
     private final TeamSummaryService service;
 
-    public TeamSummaryController(TeamSummaryService service) {
+    public TeamSummaryRecordController(TeamSummaryService service) {
         this.service = service;
     }
 
