@@ -7,4 +7,7 @@ public interface UserAccountService {
     UserAccount registerUser(UserAccount user);
 
     UserAccount findByEmail(String email);
+    List<UserAccount> getAllUsers();
+
+    UserAccount getUserById(Long id);
 }
