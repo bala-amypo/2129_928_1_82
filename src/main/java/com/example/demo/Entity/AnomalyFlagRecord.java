@@ -2,8 +2,7 @@ package com.example.demo.Entity;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
-@Getter
-@Setter
+
 @Entity
 public class AnomalyFlagRecord {
 
