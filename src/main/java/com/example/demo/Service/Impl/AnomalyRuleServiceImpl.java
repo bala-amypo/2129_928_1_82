@@ -1,10 +1,9 @@
-// AnomalyRuleServiceImpl.java
-package com.example.demo.service;
+package com.example.demo.Service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.example.demo.entity.AnomalyRule;
-import com.example.demo.repository.AnomalyRuleRepository;
+import com.example.demo.Entity.AnomalyRule;
+import com.example.demo.Repository.AnomalyRuleRepository;
 
 @Service
 public class AnomalyRuleServiceImpl implements AnomalyRuleService {
@@ -33,9 +32,7 @@ public class AnomalyRuleServiceImpl implements AnomalyRuleService {
     }
 
     public AnomalyRule getRuleByCode(String ruleCode) {
-        return repo.findAll().stream()
-                .filter(r -> r.getRuleCode().equals(ruleCode))
-                .findFirst().orElseThrow();
+        return repo.findAll().stream().filter(r -> r.getRuleCode().equals(ruleCode)).findFirst().orElseThrow();
     }
 
     public List<AnomalyRule> getAllRules() {
