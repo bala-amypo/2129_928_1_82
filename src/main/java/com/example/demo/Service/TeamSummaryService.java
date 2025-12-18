@@ -1,7 +1,7 @@
 package com.example.demo.Service;
 
 import java.util.List;
-import com.example.demo.entity.TeamSummaryRecord;
+import com.example.demo.Entity.TeamSummaryRecord;
 
 public interface TeamSummaryService {
 
