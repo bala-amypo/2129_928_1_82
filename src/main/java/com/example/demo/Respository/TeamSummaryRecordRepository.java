@@ -2,7 +2,7 @@ package com.example.demo.Repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.entity.TeamSummaryRecord;
+import com.example.demo.Entity.TeamSummaryRecord;
 
 public interface TeamSummaryRecordRepository extends JpaRepository<TeamSummaryRecord, Long> {
 
