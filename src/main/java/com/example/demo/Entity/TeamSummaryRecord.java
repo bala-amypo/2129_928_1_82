@@ -1,5 +1,4 @@
-// TeamSummaryRecord.java
-package com.example.demo.entity;
+package com.example.demo.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,10 +21,7 @@ public class TeamSummaryRecord {
 
     public TeamSummaryRecord() {}
 
-    public TeamSummaryRecord(Long id, String teamName, LocalDate summaryDate,
-            Double avgHoursLogged, Double avgTasksCompleted,
-            Double avgScore, Integer anomalyCount,
-            LocalDateTime generatedAt) {
+    public TeamSummaryRecord(Long id, String teamName, LocalDate summaryDate,Double avgHoursLogged, Double avgTasksCompleted,Double avgScore, Integer anomalyCount,LocalDateTime generatedAt) {
         this.id = id;
         this.teamName = teamName;
         this.summaryDate = summaryDate;
@@ -77,5 +73,7 @@ public class TeamSummaryRecord {
     public Integer getAnomalyCount() {
      return anomalyCount; 
     }
-    public void setAnomalyCount(Integer anomalyCount) { this.anomalyCount = anomalyCount; }
+    public void setAnomalyCount(Integer anomalyCount) {
+     this.anomalyCount = anomalyCount; 
+    }
 }
