@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.entity.AnomalyFlagRecord;
+
+public interface AnomalyFlagRecordRepository extends JpaRepository<AnomalyFlagRecord, Long> {
+
+    List<AnomalyFlagRecord> findByMetricId(Long metricId);
+}
