@@ -2,46 +2,57 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.UserAccount;
 import com.example.demo.Service.UserAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/users")
+@Path("/api/users")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserAccountController {
 
-    @Autowired
+    @Inject
     private UserAccountService userAccountService;
 
     // Create a new user
-    @PostMapping
-    public UserAccount createUser(@RequestBody UserAccount userAccount) {
-        return userAccountService.createUser(userAccount);
+    @POST
+    public Response createUser(UserAccount userAccount) {
+        UserAccount createdUser = userAccountService.createUser(userAccount);
+        return Response.status(Response.Status.CREATED).entity(createdUser).build();
     }
 
     // Get all users
-    @GetMapping
+    @GET
     public List<UserAccount> getAllUsers() {
         return userAccountService.getAllUsers();
     }
 
     // Get user by ID
-    @GetMapping("/{id}")
-    public Optional<UserAccount> getUserById(@PathVariable Long id) {
-        return userAccountService.getUserById(id);
+    @GET
+    @Path("/{id}")
+    public Response getUserById(@PathParam("id") Long id) {
+        Optional<UserAccount> user = userAccountService.getUserById(id);
+        return user.map(Response::ok)
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
     }
 
     // Update user
-    @PutMapping("/{id}")
-    public UserAccount updateUser(@PathVariable Long id, @RequestBody UserAccount userAccount) {
-        return userAccountService.updateUser(id, userAccount);
+    @PUT
+    @Path("/{id}")
+    public Response updateUser(@PathParam("id") Long id, UserAccount userAccount) {
+        UserAccount updatedUser = userAccountService.updateUser(id, userAccount);
+        return Response.ok(updatedUser).build();
     }
 
     // Delete user
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    @DELETE
+    @Path("/{id}")
+    public Response deleteUser(@PathParam("id") Long id) {
         userAccountService.deleteUser(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

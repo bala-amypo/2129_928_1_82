@@ -2,16 +2,16 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.UserAccount;
 import com.example.demo.Repository.UserAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@ApplicationScoped
 public class UserAccountService {
 
-    @Autowired
+    @Inject
     private UserAccountRepository userAccountRepository;
 
     // Create operation
