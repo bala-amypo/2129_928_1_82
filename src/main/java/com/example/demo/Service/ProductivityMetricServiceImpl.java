@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Entity.ProductivityMetricRecord;
 import com.example.demo.Repository.ProductivityMetricRecordRepository;
 
+
 @Service
 public class ProductivityMetricServiceImpl implements ProductivityMetricService {
 
@@ -39,4 +40,14 @@ public class ProductivityMetricServiceImpl implements ProductivityMetricService 
     public List<ProductivityMetricRecord> getAllMetrics() {
         return repo.findAll();
     }
+    
+
+    public class ProductivityCalculator {
+
+    
+        public double calculateProductivity(int someInput) {
+            return someInput * 1.5; // Placeholder logic
+    }
+}
+
 }
