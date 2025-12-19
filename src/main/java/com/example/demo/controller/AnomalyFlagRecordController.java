@@ -1,36 +1,28 @@
-package com.example.demo.entity;
+package com.example.demo.controller;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import com.example.demo.entity.AnomalyFlagRecord;
+import com.example.demo.service.AnomalyFlagService;
+import org.springframework.web.bind.annotation.*;
 
-@Entity
-public class AnomalyFlagRecord {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@RestController
+@RequestMapping("/flags")
+public class AnomalyFlagController {
 
-    private Long employeeId;
-    private Long metricId;
-    private String ruleCode;
-    private Boolean resolved;
-    private LocalDateTime flaggedAt;
+    private final AnomalyFlagService service;
 
-    @PrePersist
-    void onCreate() {
-        this.flaggedAt = LocalDateTime.now();
-        this.resolved = false;
+    public AnomalyFlagController(AnomalyFlagService service) {
+        this.service = service;
     }
 
-    public AnomalyFlagRecord() {}
+    @PostMapping
+    public AnomalyFlagRecord create(@RequestBody AnomalyFlagRecord flag) {
+        return service.save(flag);
+    }
 
-    public Long getId() { return id; }
-    public Long getEmployeeId() { return employeeId; }
-    public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
-    public Long getMetricId() { return metricId; }
-    public void setMetricId(Long metricId) { this.metricId = metricId; }
-    public String getRuleCode() { return ruleCode; }
-    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
-    public Boolean getResolved() { return resolved; }
-    public void setResolved(Boolean resolved) { this.resolved = resolved; }
+    @GetMapping
+    public List<AnomalyFlagRecord> getAll() {
+        return service.getAll();
+    }
 }
