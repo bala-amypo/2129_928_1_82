@@ -3,8 +3,10 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "employee_profiles")
 public class EmployeeProfile {
 
     @Id
@@ -12,7 +14,7 @@ public class EmployeeProfile {
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String employeeId;
 
     @NotBlank
@@ -27,6 +29,16 @@ public class EmployeeProfile {
     private Boolean active;
     private LocalDateTime createdAt;
 
+    @OneToMany(
+        mappedBy = "employee",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<ProductivityMetricRecord> metrics;
+
+    @OneToOne(mappedBy = "employee")
+    private UserAccount userAccount;
+
     @PrePersist
     void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -38,40 +50,60 @@ public class EmployeeProfile {
     public Long getId() { 
         return id; 
     }
+
     public String getEmployeeId() { 
-     return employeeId; 
+        return employeeId; 
     }
+
     public void setEmployeeId(String employeeId) {
-         this.employeeId = employeeId; 
+        this.employeeId = employeeId; 
     }
+
     public String getFullName() {
-         return fullName; 
+        return fullName; 
     }
+
     public void setFullName(String fullName) {
-         this.fullName = fullName; 
+        this.fullName = fullName; 
     }
+
     public String getEmail() {
-         return email; 
+        return email; 
     }
+
     public void setEmail(String email) {
-         this.email = email; 
+        this.email = email; 
     }
+
     public String getTeamName() {
-         return teamName; 
+        return teamName; 
     }
+
     public void setTeamName(String teamName) {
-         this.teamName = teamName; 
+        this.teamName = teamName; 
     }
+
     public String getRole() {
-         return role;
+        return role;
     }
+
     public void setRole(String role) {
-         this.role = role;
+        this.role = role;
     }
+
     public Boolean getActive() {
-         return active; 
+        return active; 
     }
+
     public void setActive(Boolean active) {
-         this.active = active; 
+        this.active = active; 
+    }
+
+    public List<ProductivityMetricRecord> getMetrics() {
+        return metrics;
+    }
+
+    public void setMetrics(List<ProductivityMetricRecord> metrics) {
+        this.metrics = metrics;
     }
 }
