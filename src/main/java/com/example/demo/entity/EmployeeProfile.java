@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -34,9 +36,11 @@ public class EmployeeProfile {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
+    @JsonManagedReference
     private List<ProductivityMetricRecord> metrics;
 
     @OneToOne(mappedBy = "employee")
+    @JsonBackReference
     private UserAccount userAccount;
 
     @PrePersist
@@ -47,63 +51,27 @@ public class EmployeeProfile {
 
     public EmployeeProfile() {}
 
-    public Long getId() { 
-        return id; 
-    }
+    // getters & setters
+    public Long getId() { return id; }
 
-    public String getEmployeeId() { 
-        return employeeId; 
-    }
+    public String getEmployeeId() { return employeeId; }
+    public void setEmployeeId(String employeeId) { this.employeeId = employeeId; }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId; 
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public String getFullName() {
-        return fullName; 
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName; 
-    }
+    public String getTeamName() { return teamName; }
+    public void setTeamName(String teamName) { this.teamName = teamName; }
 
-    public String getEmail() {
-        return email; 
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public void setEmail(String email) {
-        this.email = email; 
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
-    public String getTeamName() {
-        return teamName; 
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName; 
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Boolean getActive() {
-        return active; 
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active; 
-    }
-
-    public List<ProductivityMetricRecord> getMetrics() {
-        return metrics;
-    }
-
-    public void setMetrics(List<ProductivityMetricRecord> metrics) {
-        this.metrics = metrics;
-    }
+    public List<ProductivityMetricRecord> getMetrics() { return metrics; }
+    public void setMetrics(List<ProductivityMetricRecord> metrics) { this.metrics = metrics; }
 }
