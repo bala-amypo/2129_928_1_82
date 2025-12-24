@@ -5,7 +5,6 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.EmployeeProfileRepository;
 import com.example.demo.service.EmployeeProfileService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,23 +17,15 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
         this.repo = repo;
     }
 
-    @Override
-    @Transactional
     public EmployeeProfile save(EmployeeProfile emp) {
         return repo.save(emp);
     }
 
-    @Override
-    @Transactional(readOnly = true)
     public EmployeeProfile getById(Long id) {
         return repo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Employee not found with id: " + id)
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
     }
 
-    @Override
-    @Transactional(readOnly = true)
     public List<EmployeeProfile> getAll() {
         return repo.findAll();
     }

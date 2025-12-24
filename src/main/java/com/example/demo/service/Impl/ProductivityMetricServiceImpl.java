@@ -5,7 +5,6 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ProductivityMetricRepository;
 import com.example.demo.service.ProductivityMetricService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,30 +17,19 @@ public class ProductivityMetricServiceImpl implements ProductivityMetricService 
         this.repo = repo;
     }
 
-    @Override
-    @Transactional
     public ProductivityMetricRecord save(ProductivityMetricRecord record) {
-
-        double score =
-                (record.getHoursLogged() != null ? record.getHoursLogged() * 1.5 : 0) +
-                (record.getTasksCompleted() != null ? record.getTasksCompleted() * 2 : 0);
-
-        record.setProductivityScore(score);
-
+        record.setProductivityScore(
+                (record.getHoursLogged() * 1.5) +
+                (record.getTasksCompleted() * 2)
+        );
         return repo.save(record);
     }
 
-    @Override
-    @Transactional(readOnly = true)
     public ProductivityMetricRecord getById(Long id) {
         return repo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Metric not found with id: " + id)
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Metric not found"));
     }
 
-    @Override
-    @Transactional(readOnly = true)
     public List<ProductivityMetricRecord> getAll() {
         return repo.findAll();
     }
