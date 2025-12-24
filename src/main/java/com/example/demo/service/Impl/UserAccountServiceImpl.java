@@ -18,15 +18,11 @@ public class UserAccountServiceImpl implements UserAccountService {
         this.repo = repo;
     }
 
-    /**
-     * WRITE operation → Transaction REQUIRED
-     * Business validation is done here
-     */
+    // WRITE → Transaction required
     @Override
     @Transactional
     public UserAccount save(UserAccount user) {
 
-        // ✅ Business validation (NOT annotation-based)
         if (user.getPassword() == null || user.getPassword().length() < 6) {
             throw new IllegalArgumentException(
                     "Password Should be greater than 6 characters"
@@ -36,17 +32,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         return repo.save(user);
     }
 
-    /**
-     * READ operation → Transaction NOT REQUIRED
-     */
-    @Override
-    public List<UserAccount> getAll() {
-        return repo.findAll();
-    }
-
-    /**
-     * READ operation → Transaction NOT REQUIRED
-     */
+    // READ → No transaction needed
     @Override
     public UserAccount getById(Long id) {
         return repo.findById(id)
@@ -55,5 +41,11 @@ public class UserAccountServiceImpl implements UserAccountService {
                                 "User not found with id: " + id
                         )
                 );
+    }
+
+    // READ → No transaction needed
+    @Override
+    public List<UserAccount> getAll() {
+        return repo.findAll();
     }
 }
