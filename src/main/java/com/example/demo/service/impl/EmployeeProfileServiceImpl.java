@@ -4,16 +4,11 @@ import com.example.demo.model.EmployeeProfile;
 import com.example.demo.repository.EmployeeProfileRepository;
 import com.example.demo.service.EmployeeProfileService;
 
-import com.example.demo.exception.ResourceNotFoundException;
-
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Transactional
 public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 
     private final EmployeeProfileRepository repository;
@@ -30,7 +25,7 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
     @Override
     public EmployeeProfile getEmployeeById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
     @Override
@@ -45,8 +40,8 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 
     @Override
     public EmployeeProfile updateEmployeeStatus(Long id, boolean active) {
-        EmployeeProfile employee = getEmployeeById(id);
-        employee.setActive(active);
-        return repository.save(employee);
+        EmployeeProfile emp = getEmployeeById(id);
+        emp.setActive(active);
+        return repository.save(emp);
     }
 }
