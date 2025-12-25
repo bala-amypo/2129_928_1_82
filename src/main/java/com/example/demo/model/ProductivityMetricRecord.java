@@ -1,12 +1,15 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(
-    uniqueConstraints = @UniqueConstraint(columnNames = {"employeeId", "date"})
+    name = "productivity_metric_records",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"employee_id", "date"})
 )
 public class ProductivityMetricRecord {
 
@@ -14,29 +17,36 @@ public class ProductivityMetricRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long employeeId;
+    // ✅ THIS FIELD WAS MISSING
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private EmployeeProfile employee;
 
     private LocalDate date;
 
-    @Min(0)
     private Double hoursLogged;
-
-    @Min(0)
     private Integer tasksCompleted;
-
-    @Min(0)
     private Integer meetingsAttended;
-
     private Double productivityScore;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String rawDataJson;
+
+    private LocalDateTime submittedAt;
+
+    @OneToMany(mappedBy = "metric", cascade = CascadeType.ALL)
+    private List<AnomalyFlagRecord> anomalyFlags;
+
+    @PrePersist
+    public void onCreate() {
+        this.submittedAt = LocalDateTime.now();
+    }
 
     // getters & setters
     public Long getId() { return id; }
 
-    public Long getEmployeeId() { return employeeId; }
-    public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
+    public EmployeeProfile getEmployee() { return employee; }
+    public void setEmployee(EmployeeProfile employee) { this.employee = employee; }
 
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
@@ -55,4 +65,6 @@ public class ProductivityMetricRecord {
 
     public String getRawDataJson() { return rawDataJson; }
     public void setRawDataJson(String rawDataJson) { this.rawDataJson = rawDataJson; }
+
+    public LocalDateTime getSubmittedAt() { return submittedAt; }
 }

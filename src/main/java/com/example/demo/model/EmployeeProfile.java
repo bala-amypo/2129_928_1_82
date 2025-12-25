@@ -16,32 +16,27 @@ public class EmployeeProfile {
     private Long id;
 
     @NotBlank
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String employeeId;
 
     @NotBlank
-    @Column(nullable = false)
     private String fullName;
 
     @Email
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
 
     private String teamName;
 
-    // REQUIRED BY SPEC
-    private String role; // EMPLOYEE, MANAGER, ADMIN, etc.
+    private String role;
 
     private Boolean active = true;
 
-    // REQUIRED BY SPEC
     private LocalDateTime createdAt;
 
-    // RELATIONSHIPS
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<ProductivityMetricRecord> metrics;
 
-    // ---- lifecycle hook ----
     @PrePersist
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -70,7 +65,4 @@ public class EmployeeProfile {
     public void setActive(Boolean active) { this.active = active; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
-
-    public List<ProductivityMetricRecord> getMetrics() { return metrics; }
-    public void setMetrics(List<ProductivityMetricRecord> metrics) { this.metrics = metrics; }
 }
