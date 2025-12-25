@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ProductivityMetricRecord;
+import com.example.demo.entity.EmployeeProfile;
 import java.util.List;
 
-public interface ProductivityMetricService {
-    ProductivityMetricRecord save(ProductivityMetricRecord record);
-    ProductivityMetricRecord getById(Long id);
-    List<ProductivityMetricRecord> getAll();
+public interface EmployeeProfileService {
+    EmployeeProfile save(EmployeeProfile emp);
+    EmployeeProfile getById(Long id);
+    List<EmployeeProfile> getAll();
 }
