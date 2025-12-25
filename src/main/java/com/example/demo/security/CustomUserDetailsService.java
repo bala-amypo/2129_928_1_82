@@ -3,6 +3,8 @@ package com.example.demo.security;
 import com.example.demo.model.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.stream.Collectors;
 
 public class CustomUserDetailsService implements UserDetailsService {
@@ -14,14 +16,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        UserAccount u = repo.findByEmail(email)
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+
+        UserAccount user = repo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return User.builder()
-                .username(u.getEmail())
-                .password(u.getPasswordHash())
-                .authorities(u.getRoles().toArray(String[]::new))
+                .username(user.getEmail())
+                .password(user.getPasswordHash())
+                .authorities(
+                        user.getRoles().stream()
+                                .map(SimpleGrantedAuthority::new)
+                                .collect(Collectors.toList())
+                )
                 .build();
     }
 }
