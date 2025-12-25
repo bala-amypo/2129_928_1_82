@@ -1,16 +1,33 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "employee_profiles")
 public class EmployeeProfile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Column(unique = true)
     private String employeeId;
+
+    @NotBlank
     private String fullName;
+
+    @Email
+    @Column(unique = true)
     private String email;
+
     private String teamName;
+
     private Boolean active = true;
 
-    public EmployeeProfile() {}
-
+    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
