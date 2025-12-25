@@ -19,9 +19,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UserAccount register(@RequestBody UserAccount user) {
-        return service.register(user);
-    }
+public UserAccount register(@RequestBody UserAccount user) {
+    return service.registerUser(user);   // ✅ FIXED
+}
+
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest req) {
