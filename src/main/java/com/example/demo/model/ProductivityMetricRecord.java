@@ -17,9 +17,8 @@ public class ProductivityMetricRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ THIS FIELD WAS MISSING
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id")
     private EmployeeProfile employee;
 
     private LocalDate date;
@@ -38,33 +37,24 @@ public class ProductivityMetricRecord {
     private List<AnomalyFlagRecord> anomalyFlags;
 
     @PrePersist
-    public void onCreate() {
-        this.submittedAt = LocalDateTime.now();
+    public void onSubmit() {
+        submittedAt = LocalDateTime.now();
     }
 
     // getters & setters
     public Long getId() { return id; }
-
     public EmployeeProfile getEmployee() { return employee; }
-    public void setEmployee(EmployeeProfile employee) { this.employee = employee; }
-
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
-
     public Double getHoursLogged() { return hoursLogged; }
-    public void setHoursLogged(Double hoursLogged) { this.hoursLogged = hoursLogged; }
-
     public Integer getTasksCompleted() { return tasksCompleted; }
-    public void setTasksCompleted(Integer tasksCompleted) { this.tasksCompleted = tasksCompleted; }
-
     public Integer getMeetingsAttended() { return meetingsAttended; }
-    public void setMeetingsAttended(Integer meetingsAttended) { this.meetingsAttended = meetingsAttended; }
-
     public Double getProductivityScore() { return productivityScore; }
-    public void setProductivityScore(Double productivityScore) { this.productivityScore = productivityScore; }
-
     public String getRawDataJson() { return rawDataJson; }
-    public void setRawDataJson(String rawDataJson) { this.rawDataJson = rawDataJson; }
 
-    public LocalDateTime getSubmittedAt() { return submittedAt; }
+    public void setEmployee(EmployeeProfile employee) { this.employee = employee; }
+    public void setDate(LocalDate date) { this.date = date; }
+    public void setHoursLogged(Double hoursLogged) { this.hoursLogged = hoursLogged; }
+    public void setTasksCompleted(Integer tasksCompleted) { this.tasksCompleted = tasksCompleted; }
+    public void setMeetingsAttended(Integer meetingsAttended) { this.meetingsAttended = meetingsAttended; }
+    public void setProductivityScore(Double productivityScore) { this.productivityScore = productivityScore; }
+    public void setRawDataJson(String rawDataJson) { this.rawDataJson = rawDataJson; }
 }

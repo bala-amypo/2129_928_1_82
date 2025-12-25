@@ -12,51 +12,30 @@ public class AnomalyFlagRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔗 Employee relationship
-    @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    private EmployeeProfile employee;
-
-    // 🔗 Metric relationship (THIS FIXES THE ERROR)
-    @ManyToOne
-    @JoinColumn(name = "metric_id", nullable = false)
-    private ProductivityMetricRecord metric;
-
     private String ruleCode;
     private String severity;
-
-    @Column(length = 1000)
     private String details;
+    private Boolean resolved = false;
 
     private LocalDateTime flaggedAt;
 
-    private Boolean resolved = false;
+    @ManyToOne
+    @JoinColumn(name = "metric_id")
+    private ProductivityMetricRecord metric;
 
     @PrePersist
-    public void onCreate() {
-        this.flaggedAt = LocalDateTime.now();
+    public void onFlag() {
+        flaggedAt = LocalDateTime.now();
     }
 
     // getters & setters
     public Long getId() { return id; }
-
-    public EmployeeProfile getEmployee() { return employee; }
-    public void setEmployee(EmployeeProfile employee) { this.employee = employee; }
-
-    public ProductivityMetricRecord getMetric() { return metric; }
-    public void setMetric(ProductivityMetricRecord metric) { this.metric = metric; }
-
     public String getRuleCode() { return ruleCode; }
-    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
-
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
-
-    public String getDetails() { return details; }
-    public void setDetails(String details) { this.details = details; }
-
-    public LocalDateTime getFlaggedAt() { return flaggedAt; }
-
     public Boolean getResolved() { return resolved; }
+
+    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
+    public void setSeverity(String severity) { this.severity = severity; }
+    public void setDetails(String details) { this.details = details; }
     public void setResolved(Boolean resolved) { this.resolved = resolved; }
+    public void setMetric(ProductivityMetricRecord metric) { this.metric = metric; }
 }
