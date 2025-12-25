@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.EmployeeProfile;
 
 import java.util.List;
-import java.util.Optional;  // ✅ MUST BE HERE TOO
+import java.util.Optional;  
 
 public interface EmployeeProfileService {
 
