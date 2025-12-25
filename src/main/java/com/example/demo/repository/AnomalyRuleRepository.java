@@ -1,7 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.AnomalyRule;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import com.example.demo.model.AnomalyRule;
 
-public interface AnomalyRuleRepository extends JpaRepository<AnomalyRule, Long> {
+public interface AnomalyRuleRepository {
+    List<AnomalyRule> findByActiveTrue();
 }

@@ -1,54 +1,22 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Entity
-@Table(
-    name = "productivity_metrics",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"employee_id", "date"})
-)
 public class ProductivityMetricRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "employee_id")
-    @JsonBackReference
-    private EmployeeProfile employee;
-
-    @NotNull
+    private Long employeeId;
     private LocalDate date;
-
-    @PositiveOrZero
     private Double hoursLogged;
-
-    @PositiveOrZero
     private Integer tasksCompleted;
-
-    @PositiveOrZero
     private Integer meetingsAttended;
-
     private Double productivityScore;
-    private LocalDateTime submittedAt;
-
-    @PrePersist
-    void onCreate() {
-        this.submittedAt = LocalDateTime.now();
-    }
+    private String rawDataJson;
 
     public ProductivityMetricRecord() {}
 
-    // getters & setters
-    public Long getId() { return id; }
-
-    public EmployeeProfile getEmployee() { return employee; }
-    public void setEmployee(EmployeeProfile employee) { this.employee = employee; }
+    public Long getEmployeeId() { return employeeId; }
+    public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
 
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
@@ -64,4 +32,7 @@ public class ProductivityMetricRecord {
 
     public Double getProductivityScore() { return productivityScore; }
     public void setProductivityScore(Double productivityScore) { this.productivityScore = productivityScore; }
+
+    public String getRawDataJson() { return rawDataJson; }
+    public void setRawDataJson(String rawDataJson) { this.rawDataJson = rawDataJson; }
 }

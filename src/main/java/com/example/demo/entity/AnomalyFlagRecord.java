@@ -1,76 +1,21 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-
-@Entity
-@Table(name = "anomaly_flags")
 public class AnomalyFlagRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String ruleCode;
+    private String severity;
+    private String details;
+    private Boolean resolved = false;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "employee_id")
-    private EmployeeProfile employee;
+    public String getRuleCode() { return ruleCode; }
+    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "metric_id")
-    private ProductivityMetricRecord metric;
+    public String getSeverity() { return severity; }
+    public void setSeverity(String severity) { this.severity = severity; }
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "rule_id")
-    private AnomalyRule rule;
+    public String getDetails() { return details; }
+    public void setDetails(String details) { this.details = details; }
 
-    private Boolean resolved;
-    private LocalDateTime flaggedAt;
-
-    @PrePersist
-    void onCreate() {
-        this.flaggedAt = LocalDateTime.now();
-        this.resolved = false;
-    }
-
-    public AnomalyFlagRecord() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public EmployeeProfile getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeeProfile employee) {
-        this.employee = employee;
-    }
-
-    public ProductivityMetricRecord getMetric() {
-        return metric;
-    }
-
-    public void setMetric(ProductivityMetricRecord metric) {
-        this.metric = metric;
-    }
-
-    public AnomalyRule getRule() {
-        return rule;
-    }
-
-    public void setRule(AnomalyRule rule) {
-        this.rule = rule;
-    }
-
-    public Boolean getResolved() {
-        return resolved;
-    }
-
-    public void setResolved(Boolean resolved) {
-        this.resolved = resolved;
-    }
-
-    public LocalDateTime getFlaggedAt() {
-        return flaggedAt;
-    }
+    public Boolean getResolved() { return resolved; }
+    public void setResolved(Boolean resolved) { this.resolved = resolved; }
 }
