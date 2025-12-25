@@ -37,4 +37,9 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
     public Optional<EmployeeProfile> findByEmployeeId(String empId) {
         return repo.findByEmployeeId(empId);
     }
+    @Override
+public List<EmployeeProfile> getAllEmployees() {
+    return repository.findAll();
+}
+
 }

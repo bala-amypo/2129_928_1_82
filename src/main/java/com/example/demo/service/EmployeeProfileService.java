@@ -8,4 +8,6 @@ public interface EmployeeProfileService {
     EmployeeProfile getEmployeeById(Long id);
     EmployeeProfile updateEmployeeStatus(Long id, boolean active);
     Optional<EmployeeProfile> findByEmployeeId(String empId);
+    List<EmployeeProfile> getAllEmployees();
+
 }

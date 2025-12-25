@@ -1,51 +1,17 @@
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+package com.example.demo.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-@Table(name = "employee_profiles")
-public class EmployeeProfile {
+public class EmployeeProfileDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
-    @Column(unique = true, nullable = false)
     private String employeeId;
-
-    @NotBlank
-    @Column(nullable = false)
     private String fullName;
-
-    @Email
-    @Column(unique = true, nullable = false)
     private String email;
-
     private String teamName;
-
-    // REQUIRED BY SPEC
-    private String role; // EMPLOYEE, MANAGER, ADMIN, etc.
-
-    private Boolean active = true;
-
-    // REQUIRED BY SPEC
+    private String role;
+    private Boolean active;
     private LocalDateTime createdAt;
-
-    // RELATIONSHIPS
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<ProductivityMetricRecord> metrics;
-
-    // ---- lifecycle hook ----
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 
     // getters & setters
     public Long getId() { return id; }
@@ -70,7 +36,5 @@ public class EmployeeProfile {
     public void setActive(Boolean active) { this.active = active; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
-
-    public List<ProductivityMetricRecord> getMetrics() { return metrics; }
-    public void setMetrics(List<ProductivityMetricRecord> metrics) { this.metrics = metrics; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
