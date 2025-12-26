@@ -5,6 +5,7 @@ import com.example.demo.dto.AuthResponse;
 import com.example.demo.model.UserAccount;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserAccountService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.web.bind.annotation.*;
 @RestController
