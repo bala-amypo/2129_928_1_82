@@ -12,12 +12,11 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(name = "password", nullable = false)
-private String passwordHash;
-
+    private String password;   // ✅ field name is password
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
@@ -38,8 +37,9 @@ private String passwordHash;
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    // ✅ renamed methods
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public Set<String> getRoles() { return roles; }
     public void setRoles(Set<String> roles) { this.roles = roles; }

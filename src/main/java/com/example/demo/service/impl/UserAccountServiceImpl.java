@@ -7,8 +7,7 @@ import com.example.demo.service.UserAccountService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-@Service   // 🔥 THIS IS THE KEY
+@Service
 public class UserAccountServiceImpl implements UserAccountService {
 
     private final UserAccountRepository repo;
@@ -22,7 +21,10 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount registerUser(UserAccount user) {
-        user.setPasswordHash(encoder.encode(user.getPasswordHash()));
+
+        // ✅ HASH BUT STORE IN `password`
+        user.setPassword(encoder.encode(user.getPassword()));
+
         return repo.save(user);
     }
 
