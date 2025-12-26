@@ -15,7 +15,9 @@ public class UserAccount {
     @Column(unique = true)
     private String email;
 
-    private String passwordHash;
+    @Column(name = "password", nullable = false)
+private String passwordHash;
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
