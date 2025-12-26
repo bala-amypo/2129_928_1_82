@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Component   // ✅ THIS IS THE FIX
+@Component   
 public class JwtTokenProvider {
 
     private final String secretKey = "demo-secret-key-123456";
