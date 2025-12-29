@@ -34,7 +34,6 @@ public class AuthController {
 
         UserAccount user = service.findByEmail(request.getEmail());
 
-        // ✅ PASSWORD CHECK (MANDATORY)
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }

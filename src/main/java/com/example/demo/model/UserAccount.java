@@ -16,7 +16,7 @@ public class UserAccount {
     private String email;
 
     @Column(name = "password", nullable = false)
-    private String password;   // ✅ field name is password
+    private String password;   
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;

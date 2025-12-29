@@ -51,7 +51,7 @@ public class JwtTokenProvider {
     }
 
     public String getEmailFromToken(String token) {
-        return Jwts.parserBuilder()                // ✅ FIX
+        return Jwts.parserBuilder()                
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
