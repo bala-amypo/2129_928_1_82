@@ -7,10 +7,8 @@ public class AuthResponse {
     private String email;
     private String role;
 
-    // ✅ No-arg constructor (important for Jackson)
     public AuthResponse() {}
 
-    // ✅ 4-arg constructor (matches controller)
     public AuthResponse(String token, Long userId, String email, String role) {
         this.token = token;
         this.userId = userId;
@@ -18,7 +16,6 @@ public class AuthResponse {
         this.role = role;
     }
 
-    // getters & setters
     public String getToken() {
         return token;
     }
