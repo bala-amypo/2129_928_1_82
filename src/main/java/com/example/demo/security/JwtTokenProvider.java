@@ -11,12 +11,11 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    // 🔐 MUST be at least 32 characters for HS256
     private static final String SECRET_KEY =
             "demo-secret-key-123456-demo-secret-key";
 
     private static final long EXPIRATION_MILLIS =
-            24 * 60 * 60 * 1000; // 1 day
+            24 * 60 * 60 * 1000;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(
@@ -35,13 +34,13 @@ public class JwtTokenProvider {
                 .claim("role", role)
                 .setIssuedAt(now)
                 .setExpiration(expiry)
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256) // ✅ FIX
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256) 
                 .compact();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()                    // ✅ FIX
+            Jwts.parserBuilder()                    
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token);
